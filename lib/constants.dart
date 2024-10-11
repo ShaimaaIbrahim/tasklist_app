@@ -1,23 +1,25 @@
-const baseUrl = "http://localhost:8080";
+const baseUrl = "http://10.0.2.2:8080";
 
-const allLists = "/";
-const newList = "/lists";
-const singleList = "$newList/";
+const ws = "ws://10.0.2.2:8080/ws";
+
+const allLists = "$baseUrl/";
+const newList = "$baseUrl/lists/";
+const singleList = newList;
 
 const items = "/items";
-const itemsByList = "$items/";
+const itemsByList = "$baseUrl$items/";
 const singleItem = "$items/";
 
 const db = "/db";
 const firebase = "$baseUrl$db/fbase/";
 
-const postgresql = "/postgresql";
+const postgresql = "$baseUrl/postgresql/";
 
-const cache = "/cache";
+const cache = "$baseUrl/cache/redis/";
 
-const auth = "/authentication";
-const basicAuth = "$auth/basic";
-const bearerAuth = "$auth/bearer";
+const auth = "$baseUrl/authentication";
+const basicAuth = "$auth/basic/";
+const bearerAuth = "$auth/bearer/";
 
-const api = "/api";
-const restapi = "$api/restapi";
+const api = "$baseUrl/api";
+const restapi = "$api/restapi/";

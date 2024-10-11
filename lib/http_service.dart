@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 enum Method {
   POST, GET, PATCH, DELETE
@@ -43,6 +44,7 @@ class HttpService {
       }
       return response;
     }on DioException catch(e){
+      debugPrint("DioException: ${e.toString()}");
       return e;
     }
   }

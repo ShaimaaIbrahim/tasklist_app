@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tasklist_app/auth/sign_in_screen.dart';
+import 'package:tasklist_app/auth/sign_up_screen.dart';
+import 'package:tasklist_app/landing/landing_screen.dart';
+import 'package:tasklist_app/lists/lists_screen.dart';
+import 'package:tasklist_app/lists/view_list.dart';
+import 'package:tasklist_app/recipe/recipe.dart';
+import 'package:tasklist_app/settings/custom_provider.dart';
+import 'package:tasklist_app/settings/settings.dart';
+
+import 'auth/change_password.dart';
+import 'chat/chat.dart';
+import 'file/file.dart';
+import 'lists/add_item.dart';
+
+CustomProvider customProvider = CustomProvider();
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => CustomProvider())],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,25 +32,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context)=> const  LandingScreen(),
+        '/signin': (context)=>  SignInScreen(),
+        '/signup': (context)=>  SignUpScreen(),
+        '/lists': (context)=>   ListsScreen(),
+        ViewList.routeName : (context)=> ViewList(),
+        AddItem.routeName : (context) => AddItem(),
+        "/recipe": (context) => const Recipe(),
+        "/file": (context) => const FileUpload(),
+        "/chat": (context) => const ChatRoom(),
+        "/settings" : (context) => const Settings(),
+        "/changepass": (context) => const ChangePassword()
+      },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
